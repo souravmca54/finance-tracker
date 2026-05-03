@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+# Provide a local SQLite fallback if the environment variable is missing
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./finance.db")
 
 # Fix for Railway/Heroku Postgres URLs
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
