@@ -1,3 +1,5 @@
+import os
+import uvicorn
 from fastapi import FastAPI
 from db.database import engine, Base
 from routers import auth, expense
@@ -23,3 +25,7 @@ app.include_router(expense.router)
 @app.get("/")
 def home():
     return {"message": "Finance Tracker API is running 🚀"}
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
